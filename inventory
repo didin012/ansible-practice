@@ -1,3 +1,8 @@
+[web_servers]
 54.167.98.21
+
+[db_servers]
 3.92.83.55
+
+[file_servers]
 3.90.108.240

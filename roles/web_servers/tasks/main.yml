@@ -42,9 +42,9 @@
 ##  lineinfile:
 ##    path: /etc/httpd/conf/httpd.conf
 ##    regexp: '^ServerAdmin'
-##    line: ServerAdmin somebody@somewhere.net
+##    line: ServerAdmin somebody@somewhere.com
 ##  when: ansible_distribution == "CentOS"
-##  register: httpd
+##  notify: restart_apache
 ##
 ##- name: restart httpd (CentOS)
 ##  tags: apache,centos,httpd

@@ -1,0 +1,4 @@
+- name: add ssh key for didin
+  authorized_key:
+    user: didin
+    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJweeF1POdBnpbSYYnRrmtpHVb2EHhdO40PLZWBadpE+ ansible"

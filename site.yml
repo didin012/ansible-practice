@@ -4,7 +4,7 @@
   become: true
   pre_tasks:
 
-  ### UPDATES CENTOS ###
+  ### UPDATE CENTOS ###
   #  - name: update repository index (CentOS)
   #    tags: always
   #    dnf:

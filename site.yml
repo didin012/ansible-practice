@@ -4,12 +4,31 @@
   become: true
   pre_tasks:
 
+    # Updates packagees 
   - name: install updates (Ubuntu)
     tags: always
     apt:
       upgrade: dist
       update_cache: yes
     when: ansible_distribution == "Ubuntu"
+
+- hosts: workstation
+  become: true
+  tasks:
+
+  - name: install unzip
+    package:
+      name: unzip
+
+  # Installs terraform then unarchive it to /usr/local/bin      
+  - name: install terraform
+    unarchive:
+      src: https://releases.hashicorp.com/terraform/0.12.28/terraform_0.12.28_linux_amd64.zip
+      dest: /usr/local/bin
+      remote_src: yes
+      mode: 0755
+      owner: root
+      group: root
 
 - hosts: web_servers
   become: true
@@ -24,6 +43,7 @@
       state: latest
     when: ansible_distribution == "Ubuntu"
 
+  # Copy default_site.html to the /var/www/html/ directory
   - name: copy default html file for site
     tags: apache,apache2,httpd
     copy:

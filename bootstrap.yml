@@ -1,0 +1,41 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+
+    # Updates packagees 
+  - name: install updates (Ubuntu)
+    tags: always
+    apt:
+      upgrade: dist
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+# ADDING NEW USER ###
+- hosts: all
+  become: true
+  tasks:
+
+  - name: create didin user
+    tags: always
+    user:
+      name: didin
+      groups: root
+
+### ADDING SSH FOR THIS USER ###        
+  - name: add ssh key for didin
+    tags: always
+    authorized_key:
+      user: didin
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJweeF1POdBnpbSYYnRrmtpHVb2EHhdO40PLZWBadpE+ ansible"
+
+### LET USER HAVEE SUDO PERMISSIONS"
+  - name: add sudoers file for didin
+    tags: always
+    copy:
+      src: sudoer_didin
+      dest: /etc/sudoers.d/didin
+      owner: root
+      group: root
+      mode: 0440
